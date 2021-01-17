@@ -8,6 +8,27 @@
         <div id="container">
         </div>
         <script>
+            const container = document.getElementById("container");
+            let rows = document.getElementsByClassName("rows");
+            function makeRows(rows) {
+                for (let i = 0; i < rows; i++) {
+                    let row = document.createElement("div");
+                    container.appendChild(row).className = "rows";
+                }
+            }
+            function makeColumns(columns) {
+                for (let i = 0; i < rows.length; i++) {
+                    for (let j = 0; j < columns; j++) {
+                        let cell = document.createElement("div");
+                        rows[i].appendChild(cell).className = "cells";
+                    }
+                }
+            }
+            function makeGrid(rows, columns) {
+                makeRows(rows);
+                makeColumns(columns);
+            }
+            makeGrid(16, 16);
         </script>
     </body>
 </html>
