@@ -12,6 +12,7 @@
         </div>
         <script>
             const container = document.getElementById("container");
+            const reset = document.getElementById("reset");
             let rows = document.getElementsByClassName("rows");
             let cells = document.getElementsByClassName("cells");
             function makeGrid(rows,columns) {
@@ -27,8 +28,14 @@
                     container.appendChild(row);
                 }
             }
-            makeGrid(30,30);
-            console.log(cells.length);
+            reset.addEventListener("click", clearGrid)
+            function clearGrid() {
+                while(container.firstChild) {
+                    container.removeChild(container.lastChild);
+                }
+                makeGrid(16, 16);
+            }
+            makeGrid(16,16);
         </script>
     </body>
 </html>
