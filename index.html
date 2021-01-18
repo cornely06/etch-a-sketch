@@ -7,6 +7,9 @@
     <body>
         <div id="container">
         </div>
+        <div>
+            <button id="reset">Reset</button>
+        </div>
         <script>
             const container = document.getElementById("container");
             let rows = document.getElementsByClassName("rows");
@@ -18,12 +21,14 @@
                     for (let j = 0; j < columns; j++) {
                         let cell = document.createElement("div");
                         cell.className = "cells";
+                        cell.addEventListener("mouseover", () => cell.classList.add("sketchEffect"));
                         row.appendChild(cell);
                     }
                     container.appendChild(row);
                 }
             }
-            makeGrid(16,16);
+            makeGrid(30,30);
+            console.log(cells.length);
         </script>
     </body>
 </html>
