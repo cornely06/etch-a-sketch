@@ -11,21 +11,13 @@
     display: flex;
     flex-wrap: wrap;
 }
-.revisedCells {
-    border: 1px solid black;
-}
 .cells {
-    display: flex;
-    width: 30px;
-    height: 30px;
     border: 1px solid black;
-    align-items: center;
-    justify-content: center;
 }
 .rows {
     display: flex;
 }
 
-.sketchEffect {
+.default {
     background-color: black;
 }

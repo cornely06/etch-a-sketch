@@ -13,12 +13,13 @@
         <script>
             const container = document.getElementById("container");
             const reset = document.getElementById("reset");
+            let black = "default";
             function createCell(cellSize) {
                 const cell = document.createElement("div");
                 cell.style.width = `${cellSize}px`;
                 cell.style.height = `${cellSize}px`;
-                cell.classList.add("revisedCells");
-                cell.addEventListener("mouseover", () => cell.classList.add("sketchEffect"));
+                cell.classList.add("cells");
+                cell.addEventListener("mouseover", () => cell.classList.add(black));
                 return cell;
             }
             function createGrid(gridSize) {
@@ -33,7 +34,7 @@
                 while(container.firstChild) {
                     container.removeChild(container.lastChild);
                 }
-                let number = parseInt(prompt("Enter a number 1-50", ""));
+                let number = parseInt(prompt("Enter a side length for the square grid (1-50)", ""));
                 while (number < 1 || number > 50 || isNaN(number)) {
                     number = parseInt(prompt("Please enter a valid number between 1 and 50", ""));
                 }
