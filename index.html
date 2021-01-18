@@ -18,6 +18,7 @@
                 cell.style.width = `${cellSize}px`;
                 cell.style.height = `${cellSize}px`;
                 cell.classList.add("revisedCells");
+                cell.addEventListener("mouseover", () => cell.classList.add("sketchEffect"));
                 return cell;
             }
             function createGrid(gridSize) {
@@ -32,40 +33,13 @@
                 while(container.firstChild) {
                     container.removeChild(container.lastChild);
                 }
-                let number = parseInt(prompt("Enter a number 1-100", ""));
-                while (number < 1 || number > 100 || isNaN(number)) {
-                    number = parseInt(prompt("Please enter a valid number between 1 and 100", ""));
+                let number = parseInt(prompt("Enter a number 1-50", ""));
+                while (number < 1 || number > 50 || isNaN(number)) {
+                    number = parseInt(prompt("Please enter a valid number between 1 and 50", ""));
                 }
                 createGrid(number);
             }
             createGrid(16);
-            /*
-            const container = document.getElementById("container");
-            const reset = document.getElementById("reset");
-            let rows = document.getElementsByClassName("rows");
-            let cells = document.getElementsByClassName("cells");
-            function makeGrid(rows,columns) {
-                for (let i = 0; i < rows; i++) {
-                    let row = document.createElement("div");
-                    row.className = "rows";
-                    for (let j = 0; j < columns; j++) {
-                        let cell = document.createElement("div");
-                        cell.className = "cells";
-                        cell.addEventListener("mouseover", () => cell.classList.add("sketchEffect"));
-                        row.appendChild(cell);
-                    }
-                    container.appendChild(row);
-                }
-            }
-            reset.addEventListener("click", clearGrid)
-            function clearGrid() {
-                while(container.firstChild) {
-                    container.removeChild(container.lastChild);
-                }
-                makeGrid(16, 16);
-            }
-            makeGrid(16,16);
-            */
         </script>
     </body>
 </html>
