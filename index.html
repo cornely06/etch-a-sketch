@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>rock paper scissors</title>
+        <title>Etch-A-Sketch</title>
         <link rel="stylesheet" href="style-desktop.css">
     </head>
     <body>
@@ -10,25 +10,20 @@
         <script>
             const container = document.getElementById("container");
             let rows = document.getElementsByClassName("rows");
-            function makeRows(rows) {
+            let cells = document.getElementsByClassName("cells");
+            function makeGrid(rows,columns) {
                 for (let i = 0; i < rows; i++) {
                     let row = document.createElement("div");
-                    container.appendChild(row).className = "rows";
-                }
-            }
-            function makeColumns(columns) {
-                for (let i = 0; i < rows.length; i++) {
+                    row.className = "rows";
                     for (let j = 0; j < columns; j++) {
                         let cell = document.createElement("div");
-                        rows[i].appendChild(cell).className = "cells";
+                        cell.className = "cells";
+                        row.appendChild(cell);
                     }
+                    container.appendChild(row);
                 }
             }
-            function makeGrid(rows, columns) {
-                makeRows(rows);
-                makeColumns(columns);
-            }
-            makeGrid(16, 16);
+            makeGrid(16,16);
         </script>
     </body>
 </html>

@@ -6,3 +6,7 @@
 .rows {
     display: flex;
 }
+
+.cells:hover {
+    background-color: black;
+}
