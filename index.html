@@ -13,6 +13,35 @@
         <script>
             const container = document.getElementById("container");
             const reset = document.getElementById("reset");
+            function createCell(cellSize) {
+                const cell = document.createElement("div");
+                cell.style.width = `${cellSize}px`;
+                cell.style.height = `${cellSize}px`;
+                cell.classList.add("revisedCells");
+                return cell;
+            }
+            function createGrid(gridSize) {
+                for (let i = 0; i < gridSize; i++) {
+                    for (let j = 0; j < gridSize; j++) {
+                        container.appendChild(createCell(container.clientWidth / gridSize));
+                    }
+                }
+            }
+            reset.addEventListener("click", resetGrid);
+            function resetGrid() {
+                while(container.firstChild) {
+                    container.removeChild(container.lastChild);
+                }
+                let number = parseInt(prompt("Enter a number 1-100", ""));
+                while (number < 1 || number > 100 || isNaN(number)) {
+                    number = parseInt(prompt("Please enter a valid number between 1 and 100", ""));
+                }
+                createGrid(number);
+            }
+            createGrid(16);
+            /*
+            const container = document.getElementById("container");
+            const reset = document.getElementById("reset");
             let rows = document.getElementsByClassName("rows");
             let cells = document.getElementsByClassName("cells");
             function makeGrid(rows,columns) {
@@ -36,6 +65,7 @@
                 makeGrid(16, 16);
             }
             makeGrid(16,16);
+            */
         </script>
     </body>
 </html>
