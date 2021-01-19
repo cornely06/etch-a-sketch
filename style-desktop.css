@@ -4,14 +4,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 1.1em;
 }
 html {
     background-color: lightblue;
 }
+#title {
+    font-size: 3em;
+    font-family: 'Dancing Script', cursive;
+    margin: 10px
+}
 #container {
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-wrap: wrap;
     background-color: white;
@@ -23,9 +27,10 @@ button {
     padding: 5px;
     font-family: 'Yusei Magic', sans-serif;
     color: rgb(54, 109, 126);
+    font-size: 1.2em;
 }
 #etch-a-sketch {
-    width: 600px;
+    width: 500px;
     margin: auto;
     text-align: center;
 }
