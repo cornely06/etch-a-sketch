@@ -5,29 +5,40 @@
         <link rel="stylesheet" href="style-desktop.css">
     </head>
     <body>
-        <div id="container">
-        </div>
-        <div>
-            <button id="reset">Reset</button>
-            <button id="black">Black</button>
-            <button id="grey-scale">Grey Scale</button>
-            <button id="random">Random</button>
-            <button id="eraser">Eraser</button>
+        <div id="etch-a-sketch">
+            <div id="container">
+            </div>
+                <div id="buttons">
+                <button id="clear">Clear</button>
+                <button id="black">Black</button>
+                <button id="random">Random</button>
+                <button id="eraser">Eraser</button>
+                <button id="color-picker">Pick: <input type="color"></button>
+                <div id="slider-container">
+                <button id="resize"></button>
+                <input type="range" min="1" max="50" value="16" id="myRange">
+                </div>
+            </div>
         </div>
         <script>
             const container = document.getElementById("container");
-            const reset = document.getElementById("reset");
+            const clear = document.getElementById("clear");
             const black = document.getElementById("black");
-            const grey = document.getElementById("grey-scale");
             const random = document.getElementById("random");
+            const picker = document.getElementById("color-picker");
+            const resize = document.getElementById("resize");
+            const range = document.getElementById("myRange");
+            resize.innerText = `${range.value} x ${range.value}`;
+            range.oninput = function() {
+                resize.innerText = `${this.value} x ${this.value}`;
+            }
             let hoverStyle = "black";
             function createCell(cellSize) {
                 const cell = document.createElement("div");
-                cell.style.border = "1px solid black";
+                cell.style.border = "1px solid grey";
                 cell.style.borderRadius = "2px";
                 cell.style.width = `${cellSize}px`;
                 cell.style.height = `${cellSize}px`;
-                cell.addEventListener("mouseover", () => cell.style.backgroundColor = hoverStyle);
                 return cell;
             }
             function createGrid(gridSize) {
@@ -36,18 +47,18 @@
                         container.appendChild(createCell(container.clientWidth / gridSize));
                     }
                 }
+                var cells = container.querySelectorAll("div");
+                cells.forEach(cell => cell.addEventListener("mouseover", () => cell.style.backgroundColor = hoverStyle));
             }
-            reset.addEventListener("click", resetGrid);
+            clear.addEventListener("click", resetGrid, false);
             function resetGrid() {
                 while(container.firstChild) {
                     container.removeChild(container.lastChild);
                 }
-                let number = parseInt(prompt("Enter a side length for the square grid (1-50)", ""));
-                while (number < 1 || number > 50 || isNaN(number)) {
-                    number = parseInt(prompt("Please enter a valid number between 1 and 50", ""));
-                }
+                let number = range.value;
                 createGrid(number);
             }
+            resize.addEventListener("click", resetGrid, false);
             function changeStyle(style) {
                 hoverStyle = style;
             }
@@ -57,12 +68,14 @@
             function randomNum() {
                 return Math.floor(Math.random() * 256);
             }
-                
-            console.log(randomColor());
-            black.addEventListener("click", () => changeStyle("black"));
-            grey.addEventListener("click", () => changeStyle("grey"));
-            random.addEventListener("click", () => changeStyle(randomColor()));
-            eraser.addEventListener("click", () => changeStyle("white"));
+            function userColorSelection(event) {
+                hoverStyle = event.target.value;
+            }
+            black.addEventListener("click", () => changeStyle("black"), false);
+            random.addEventListener("click", () => changeStyle(randomColor()), false);
+            eraser.addEventListener("click", () => changeStyle("white"), false);
+            picker.addEventListener("change", userColorSelection, false);
+            picker.addEventListener("input", userColorSelection, false);
             createGrid(16);
         </script>
     </body>
