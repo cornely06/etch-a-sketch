@@ -16,13 +16,17 @@
         <script>
             const container = document.getElementById("container");
             const reset = document.getElementById("reset");
-            let black = "default";
+            const black = document.getElementById("black");
+            const grey = document.getElementById("grey-scale");
+            const rainbow = document.getElementById("rainbow");
+            let hoverStyle = "black";
             function createCell(cellSize) {
                 const cell = document.createElement("div");
+                cell.style.border = "1px solid black";
+                cell.style.borderRadius = "2px";
                 cell.style.width = `${cellSize}px`;
                 cell.style.height = `${cellSize}px`;
-                cell.classList.add("cells");
-                cell.addEventListener("mouseover", () => cell.classList.add(black));
+                cell.addEventListener("mouseover", () => cell.className = hoverStyle);
                 return cell;
             }
             function createGrid(gridSize) {
@@ -43,6 +47,12 @@
                 }
                 createGrid(number);
             }
+            function changeStyle(style) {
+                hoverStyle = style;
+            }
+            black.addEventListener("click", () => changeStyle("black"));
+            grey.addEventListener("click", () => changeStyle("grey"));
+            rainbow.addEventListener("click", () => changeStyle("rainbow"));
             createGrid(16);
         </script>
     </body>

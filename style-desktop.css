@@ -11,13 +11,12 @@
     display: flex;
     flex-wrap: wrap;
 }
-.cells {
-    border: 1px solid black;
-}
-.rows {
-    display: flex;
-}
-
-.default {
+.black {
     background-color: black;
+}
+.grey {
+    background-color: grey;
+}
+.rainbow {
+    background-color: red;
 }
