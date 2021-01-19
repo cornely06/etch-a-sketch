@@ -11,7 +11,7 @@
             <button id="reset">Reset</button>
             <button id="black">Black</button>
             <button id="grey-scale">Grey Scale</button>
-            <button id="rainbow">Rainbow</button>
+            <button id="random">Random</button>
             <button id="eraser">Eraser</button>
         </div>
         <script>
@@ -19,7 +19,7 @@
             const reset = document.getElementById("reset");
             const black = document.getElementById("black");
             const grey = document.getElementById("grey-scale");
-            const rainbow = document.getElementById("rainbow");
+            const random = document.getElementById("random");
             let hoverStyle = "black";
             function createCell(cellSize) {
                 const cell = document.createElement("div");
@@ -27,7 +27,7 @@
                 cell.style.borderRadius = "2px";
                 cell.style.width = `${cellSize}px`;
                 cell.style.height = `${cellSize}px`;
-                cell.addEventListener("mouseover", () => cell.className = hoverStyle);
+                cell.addEventListener("mouseover", () => cell.style.backgroundColor = hoverStyle);
                 return cell;
             }
             function createGrid(gridSize) {
@@ -51,10 +51,18 @@
             function changeStyle(style) {
                 hoverStyle = style;
             }
+            function randomColor() {
+                return `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`
+            }
+            function randomNum() {
+                return Math.floor(Math.random() * 256);
+            }
+                
+            console.log(randomColor());
             black.addEventListener("click", () => changeStyle("black"));
             grey.addEventListener("click", () => changeStyle("grey"));
-            rainbow.addEventListener("click", () => changeStyle("rainbow"));
-            eraser.addEventListener("click", () => changeStyle("eraser"));
+            random.addEventListener("click", () => changeStyle(randomColor()));
+            eraser.addEventListener("click", () => changeStyle("white"));
             createGrid(16);
         </script>
     </body>

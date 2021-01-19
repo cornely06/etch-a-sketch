@@ -11,15 +11,3 @@
     display: flex;
     flex-wrap: wrap;
 }
-.black {
-    background-color: black;
-}
-.grey {
-    background-color: grey;
-}
-.rainbow {
-    background-color: red;
-}
-.eraser {
-    background-color: white;
-}
