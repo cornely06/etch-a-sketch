@@ -21,6 +21,8 @@ html {
 }
 button {
     padding: 5px;
+    font-family: 'Yusei Magic', sans-serif;
+    color: rgb(54, 109, 126);
 }
 #etch-a-sketch {
     width: 600px;
