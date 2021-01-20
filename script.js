@@ -6,11 +6,17 @@ const picker = document.getElementById("color-picker");
 const random = document.getElementById("random");
 let number = range.value;
 let pickerStyle = "black";
-let randomColor;
 var color = "black";
+var randomColor;
 resize.innerText = `${range.value} x ${range.value}`;
 range.oninput = function() {
     resize.innerText = `${this.value} x ${this.value}`;
+}
+function randomNum() {
+    return Math.floor(Math.random() * 256);
+}
+function randomColorMaker() {
+    randomColor = `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
 }
 function createCell(cellSize) {
     const cell = document.createElement("div");
@@ -66,7 +72,6 @@ function changeColor(event) {
             break;
     }
 }
-colorButtons.forEach(colorButton => colorButton.addEventListener("click", changeColor, false));
 function colorChoice() {
     switch (color) {
         case "rainbow":
@@ -89,17 +94,12 @@ function colorChoice() {
             break;
     }
 }
-function randomColorMaker() {
-    randomColor = `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
-}
-function randomNum() {
-    return Math.floor(Math.random() * 256);
-}
 function userColorSelection(event) {
     color = event.target.value;
     pickerStyle = event.target.value;
 }
 random.addEventListener("click", randomColorMaker, false);
+colorButtons.forEach(colorButton => colorButton.addEventListener("click", changeColor, false));
 picker.addEventListener("change", userColorSelection, false);
 picker.addEventListener("input", userColorSelection, false);
 createGrid(16);
