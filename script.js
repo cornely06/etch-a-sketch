@@ -6,6 +6,7 @@ const picker = document.getElementById("color-picker");
 const resize = document.getElementById("resize");
 const range = document.getElementById("myRange");
 let number = range.value;
+let pickerStyle = "black";
 resize.innerText = `${range.value} x ${range.value}`;
 range.oninput = function() {
     resize.innerText = `${this.value} x ${this.value}`;
@@ -54,10 +55,12 @@ function randomNum() {
 }
 function userColorSelection(event) {
     hoverStyle = event.target.value;
+    pickerStyle = event.target.value;
 }
 black.addEventListener("click", () => changeStyle("black"), false);
 random.addEventListener("click", () => changeStyle(randomColor()), false);
 eraser.addEventListener("click", () => changeStyle("white"), false);
 picker.addEventListener("change", userColorSelection, false);
 picker.addEventListener("input", userColorSelection, false);
+picker.addEventListener("click", () => changeStyle(pickerStyle), false);
 createGrid(16);
