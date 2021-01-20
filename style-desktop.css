@@ -19,6 +19,7 @@ html {
     display: flex;
     flex-wrap: wrap;
     background-color: white;
+    cursor: pointer;
 }
 #resize {
     width: 150px;
@@ -28,6 +29,10 @@ button {
     font-family: 'Yusei Magic', sans-serif;
     color: rgb(54, 109, 126);
     font-size: 1.2em;
+    cursor: pointer;
+}
+#myRange {
+    cursor: pointer;
 }
 #etch-a-sketch {
     width: 500px;
