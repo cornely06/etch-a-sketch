@@ -76,6 +76,7 @@ function colorChoice() {
     switch (color) {
         case "rainbow":
             this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            console.log(this.style.backgroundColor);
             break;
         case "black":
             this.style.backgroundColor = "black";
