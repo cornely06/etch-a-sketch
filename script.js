@@ -1,17 +1,17 @@
 const container = document.getElementById("container");
-const clear = document.getElementById("clear");
-const black = document.getElementById("black");
-const random = document.getElementById("random");
-const picker = document.getElementById("color-picker");
 const resize = document.getElementById("resize");
 const range = document.getElementById("myRange");
+const colorButtons = document.querySelectorAll(".colorButton")
+const picker = document.getElementById("color-picker");
+const random = document.getElementById("random");
 let number = range.value;
 let pickerStyle = "black";
+let randomColor;
+var color = "black";
 resize.innerText = `${range.value} x ${range.value}`;
 range.oninput = function() {
     resize.innerText = `${this.value} x ${this.value}`;
 }
-let hoverStyle = "black";
 function createCell(cellSize) {
     const cell = document.createElement("div");
     cell.style.border = "1px solid grey";
@@ -27,7 +27,7 @@ function createGrid(gridSize) {
         }
     }
     var cells = container.querySelectorAll("div");
-    cells.forEach(cell => cell.addEventListener("mouseover", () => cell.style.backgroundColor = hoverStyle));
+    cells.forEach(cell => cell.addEventListener("mouseover", colorChoice, false));
 }
 clear.addEventListener("click", clearGrid, false);
 function clearGrid() {
@@ -47,20 +47,59 @@ resize.addEventListener("click", resetGrid, false);
 function changeStyle(style) {
     hoverStyle = style;
 }
-function randomColor() {
-    return `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`
+function changeColor(event) {
+    switch(event.target.id) {
+        case "rainbow":
+            color = "rainbow";
+            break;
+        case "black":
+            color = "black";
+            break;
+        case "eraser":
+            color = "white";
+            break;
+        case "random":
+            color = randomColor;
+            break;
+        case "color-picker":
+            color = pickerStyle;
+            break;
+    }
+}
+colorButtons.forEach(colorButton => colorButton.addEventListener("click", changeColor, false));
+function colorChoice() {
+    switch (color) {
+        case "rainbow":
+            this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            break;
+        case "black":
+            this.style.backgroundColor = "black";
+            break;
+        case "eraser":
+            this.style.backgroundColor = "white";
+            break;
+        case randomColor:
+            this.style.backgroundColor = randomColor;
+            break;
+        case pickerStyle:
+            this.style.backgroundColor = pickerStyle;
+            break;
+        default:
+            this.style.backgroundColor = color;
+            break;
+    }
+}
+function randomColorMaker() {
+    randomColor = `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
 }
 function randomNum() {
     return Math.floor(Math.random() * 256);
 }
 function userColorSelection(event) {
-    hoverStyle = event.target.value;
+    color = event.target.value;
     pickerStyle = event.target.value;
 }
-black.addEventListener("click", () => changeStyle("black"), false);
-random.addEventListener("click", () => changeStyle(randomColor()), false);
-eraser.addEventListener("click", () => changeStyle("white"), false);
+random.addEventListener("click", randomColorMaker, false);
 picker.addEventListener("change", userColorSelection, false);
 picker.addEventListener("input", userColorSelection, false);
-picker.addEventListener("click", () => changeStyle(pickerStyle), false);
 createGrid(16);
