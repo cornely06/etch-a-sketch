@@ -5,3 +5,15 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.container {
+  display: flex;
+  width: 320px;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+}
