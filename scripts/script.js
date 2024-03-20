@@ -13,23 +13,41 @@ function init() {
   }
 
   let adjustSize = document.createElement("button");
-  adjustSize.textContent = "Adjust size of grid";
+  adjustSize.textContent = "Custom grid";
   adjustSize.addEventListener("click", customGrid);
   buttons.appendChild(adjustSize);
 
+  let defaultColor = document.createElement("button");
+  defaultColor.textContent = "Default";
+  defaultColor.addEventListener("click", defaultCellColor);
+  buttons.appendChild(defaultColor);
+
   let rgb = document.createElement("button");
-  rgb.textContent = "Change etch to random color";
+  rgb.textContent = "Random Color";
   rgb.addEventListener("click", rgbCell);
   buttons.appendChild(rgb);
+
+  let erase = document.createElement("button");
+  erase.textContent = "Eraser";
+  erase.addEventListener("click", eraseCells);
+  buttons.appendChild(erase);
 }
 
 function fillCell() {
-  this.classList.add("filled");
+  this.style.backgroundColor = "rgb(67, 67, 67)";
+}
+
+function defaultCellColor() {
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", randomRGB));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", eraser));
+  cells.forEach((cell) => cell.addEventListener("mouseenter", fillCell));
 }
 
 function rgbCell() {
   let cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => cell.removeEventListener("mouseenter", fillCell));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", eraser));
   cells.forEach((cell) => cell.addEventListener("mouseenter", randomRGB));
 }
 
@@ -38,9 +56,18 @@ function randomRGB() {
   const g = Math.floor(Math.random() * 255);
   const b = Math.floor(Math.random() * 255);
 
-  console.log(r, g, b);
-
   this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+}
+
+function eraseCells() {
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", fillCell));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", randomRGB));
+  cells.forEach((cell) => cell.addEventListener("mouseenter", eraser));
+}
+
+function eraser() {
+  this.style.backgroundColor = "white";
 }
 
 function customGrid() {
