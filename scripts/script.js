@@ -8,7 +8,7 @@ function init() {
     cell.classList.add("cell");
     cell.style.width = "40px";
     cell.style.height = "40px";
-    cell.addEventListener("mouseover", fillCell);
+    cell.addEventListener("mouseenter", fillCell);
     container.appendChild(cell);
   }
 
@@ -16,10 +16,31 @@ function init() {
   adjustSize.textContent = "Adjust size of grid";
   adjustSize.addEventListener("click", customGrid);
   buttons.appendChild(adjustSize);
+
+  let rgb = document.createElement("button");
+  rgb.textContent = "Change etch to random color";
+  rgb.addEventListener("click", rgbCell);
+  buttons.appendChild(rgb);
 }
 
 function fillCell() {
   this.classList.add("filled");
+}
+
+function rgbCell() {
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", fillCell));
+  cells.forEach((cell) => cell.addEventListener("mouseenter", randomRGB));
+}
+
+function randomRGB() {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+
+  console.log(r, g, b);
+
+  this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
 
 function customGrid() {
@@ -31,10 +52,10 @@ function customGrid() {
 
   for (i = 0; i < size ** 2; i++) {
     let cell = document.createElement("div");
-    cell.classList.add("cell");
+    cell.classList.toggle("cell");
     cell.style.width = 640 / size + "px";
     cell.style.height = 640 / size + "px";
-    cell.addEventListener("mouseover", fillCell);
+    cell.addEventListener("mouseenter", fillCell);
     container.appendChild(cell);
   }
 }
