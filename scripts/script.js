@@ -31,6 +31,11 @@ function init() {
   erase.textContent = "Eraser";
   erase.addEventListener("click", eraseCells);
   buttons.appendChild(erase);
+
+  let dark = document.createElement("button");
+  dark.textContent = "Darken square";
+  dark.addEventListener("click", darkenCell);
+  buttons.appendChild(dark);
 }
 
 function fillCell() {
@@ -41,6 +46,7 @@ function defaultCellColor() {
   let cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => cell.removeEventListener("mouseenter", randomRGB));
   cells.forEach((cell) => cell.removeEventListener("mouseenter", eraser));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", darken));
   cells.forEach((cell) => cell.addEventListener("mouseenter", fillCell));
 }
 
@@ -48,6 +54,7 @@ function rgbCell() {
   let cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => cell.removeEventListener("mouseenter", fillCell));
   cells.forEach((cell) => cell.removeEventListener("mouseenter", eraser));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", darken));
   cells.forEach((cell) => cell.addEventListener("mouseenter", randomRGB));
 }
 
@@ -63,11 +70,28 @@ function eraseCells() {
   let cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => cell.removeEventListener("mouseenter", fillCell));
   cells.forEach((cell) => cell.removeEventListener("mouseenter", randomRGB));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", darken));
   cells.forEach((cell) => cell.addEventListener("mouseenter", eraser));
 }
 
 function eraser() {
   this.style.backgroundColor = "white";
+}
+
+function darkenCell() {
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", fillCell));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", randomRGB));
+  cells.forEach((cell) => cell.removeEventListener("mouseenter", eraser));
+  cells.forEach((cell) => (cell.dataset.counter = 0));
+  cells.forEach((cell) => cell.addEventListener("mouseenter", darken));
+}
+
+function darken() {
+  if (this.dataset.counter < 100) {
+    this.dataset.counter = Number(this.dataset.counter) + 10;
+  }
+  this.style.backgroundColor = `hsl(0, 0%, ${100 - this.dataset.counter}%)`;
 }
 
 function customGrid() {
