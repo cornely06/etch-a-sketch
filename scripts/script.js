@@ -23,7 +23,10 @@ function fillCell() {
 }
 
 function customGrid() {
-  let size = Number(prompt("Enter a number"));
+  let size = prompt("Enter a number between 1-100", 16);
+  while (+size > 100 || +size < 1 || isNaN(size)) {
+    size = Number(prompt("Enter a number between 1-100"));
+  }
   clearContainer();
 
   for (i = 0; i < size ** 2; i++) {
